@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epoch TimeConverter</title>
+</head>
+<style>
+  * {
+    text-decoration: none;
+    border-style: none;
+  }
+  body {
+    font-family:'Courier New', Courier, monospace;
+    background-color: pink;
+  }
+
+  #input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  #input-section > #date {
+    width: 300px;
+    font-size: large;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 1rem;
+  }
+
+  button {
+    background-color: rgb(51, 51, 173);
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    opacity: .7;
+    cursor: no-drop;
+  }
+
+  #output-time {
+    width: 400px;
+    border: 5px rgb(51, 51, 173) solid;
+    margin: 1rem auto;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+  }
+
+  #timestamp {
+    font-size: 3rem;
+    font-weight: 700;
+    padding:0 1rem;
+  }
+
+</style>
+<body>
+  <section id="input-section">
+    <input type="date" id="date">
+    <button disabled id="submit-button">Convert Date</button>
+
+    <div id="output-time">
+      <h5 id="timestamp"></h5>
+    </div>
+  </section>
+</body>
+<script>
+  let date = document.querySelector('#date');
+  let timestampText = document.querySelector('#timestamp');
+  let submit = document.querySelector('#submit-button');
+
+  function getTimeStamp(date) {
+    let dateArr = date.split("-");
+    let newDate = new Date(dateArr[0], dateArr[1] - 1, dateArr[2]);
+    let timeStamp = newDate.getTime();
+    timestampText.textContent = timeStamp.toString().substring(0,10);
+  }
+
+  date.addEventListener('change', () => {
+    if(date.value !== '' && date.value !== null) {
+    submit.disabled = false;
+    console.log('true')
+  };
+  });
+
+  submit.addEventListener('click', 
+  () => {getTimeStamp(date.value);
+  });
+
+</script>
+</html>
